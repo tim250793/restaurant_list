@@ -18,8 +18,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
-    const movie = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-    res.render('show')
+    const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
+    res.render('show', { restaurantList: restaurant})
 })
 
 // start and listen on the Express server
