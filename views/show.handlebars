@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
-      
+
 
       <p class="mb-1">
         <span class="text-secondary">
@@ -35,7 +35,20 @@
         {{{restaurantsList.description}}}
       </p>
 
-      <img class="rounded mx-auto d-block mb-4 w-100" src="{{{restaurantsList.image}}}" alt="{{{restaurantsList.name}}}" style="max-width: 600px;">
+      <div class="d-flex justify-content-center">
+        <a href="/restaurants/{{ restaurant._id }}/edit">
+          <button type="button" class="btn btn-info btn-lg m-3">編輯餐廳</button>
+        </a>
+        <a href="/">
+          <button type="button" class="btn btn-info btn-lg m-3">返回首頁</button>
+        </a>
+        <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" class="m-3">
+          <button type="submit" class="btn btn-danger btn-lg">Delete</button>
+        </form>
+      </div>
+
+      <img class="rounded mx-auto d-block mb-4 w-100" src="{{{restaurantsList.image}}}" alt="{{{restaurantsList.name}}}"
+        style="max-width: 600px;">
     </div>
   </div>
 </div>
