@@ -4,8 +4,9 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-const restaurantsList = require('./restaurant.json')
+const Restaurant = require('./models/restaurants')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 // const routes = require('./routes')
 
 require('./config/mongoose')
@@ -18,16 +19,27 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
 // routes setting
+app.use(express.urlencoded({ extended: true }))
+
+//首頁
 app.get('/', (req, res) => {
-  res.render('index', { restaurantsList: restaurantsList.results })
+  // load restaurants
+  Restaurant.find()
+    .lean()
+    .then(restaurantData => res.render('index', { restaurantData }))
+    .catch(error => console.error(error))
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantsList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurantsList: restaurant })
+//顯示餐廳show頁面的路由
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('show', { restaurant }))
+    .catch(error => console.log(error))
 })
 
-
+//搜尋餐廳
 app.get("/search", (req, res) => {
   if (!req.query.keywords) {
     return res.redirect("/")
@@ -37,11 +49,27 @@ app.get("/search", (req, res) => {
   const restaurant = restaurantsList.results.filter(restaurant => {
     return restaurant.name.toLowerCase().includes(keyword)
   })
-  res.render('index', { restaurantsList: restaurant })
+  res.render('index', { restaurant })
 })
 
+//新增餐廳頁面
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  Restaurant.create(req.body)
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('edit', { restaurantsList: restaurant }))
+    .catch(error => console.log(error))
 })
 
 // start and listen on the Express server
