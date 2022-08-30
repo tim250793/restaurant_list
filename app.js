@@ -1,9 +1,14 @@
 // require packages used in the project
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
 const restaurantsList = require('./restaurant.json')
+const mongoose = require('mongoose')
+const routes = require('./routes')
+
+require('./config/mongoose')
 
 // setting template engine
 app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
@@ -33,6 +38,10 @@ app.get("/search", (req, res) => {
     return restaurant.name.toLowerCase().includes(keyword)
   })
   res.render('index', { restaurantsList: restaurant })
+})
+
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
 })
 
 // start and listen on the Express server
