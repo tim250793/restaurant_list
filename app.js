@@ -8,6 +8,8 @@ const Restaurant = require('./models/restaurants')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const routes = require('./routes')
+const morgan = require('morgan')
+
 
 require('./config/mongoose')
 
@@ -17,6 +19,7 @@ app.set('view engine', 'handlebars')
 
 // setting static files
 app.use(express.static('public'))
+app.use(morgan('combined'))
 
 // routes setting
 app.use(bodyParser.urlencoded({ extended: true }))
