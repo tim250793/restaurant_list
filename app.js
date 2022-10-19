@@ -2,7 +2,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurants')
 const mongoose = require('mongoose')
@@ -51,6 +51,6 @@ app.get("/search", (req, res) => {
 
 
 // start and listen on the Express server
-app.listen(port, () => {
-  console.log(`Express is listening on localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Express is listening on localhost:${PORT}`)
 })
