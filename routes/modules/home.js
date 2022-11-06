@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     const userId = req.user._id
     Restaurant.find({ userId })
       .lean()
-      .then(restaurantData => res.render('index', { restaurantData }))
+      .then(restaurantData => res.render('index', { restaurantData, isAuthenticated: req.isAuthenticated() }))
       .catch(error => console.error(error))
   })
 

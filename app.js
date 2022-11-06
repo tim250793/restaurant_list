@@ -27,7 +27,7 @@ app.use(morgan('combined'))
 //setting sessions
 app.use(session({
   secret: "MySecret",
-  resave: false,
+  resave: true,
   saveUninitialized: true
 }))
 

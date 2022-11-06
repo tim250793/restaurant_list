@@ -128,32 +128,13 @@ router.post('/', (req, res) => {
   const userId = req.user._id
   const name = req.body.name
 
-  // 從 req.body 拿出表單裡的資料,儲存資料到 mongoDB
+  // 從 req.body 提取表單裡資料,儲存到 mongoDB
   return Restaurant.create({ ...req.body, userId })
-    .then(() => res.redirect('/')) // 新增完成後導回首頁 
+    .then(() => res.redirect('/')) 
     .catch(error => console.log(error))
 })
 
-// 更新資料，更新完資料後將資料送給資料庫
-// router.put('/:id/', (req, res) => {
-//   const userId = req.user._id
-//   const _id = req.params.id
-
-//   return Restaurant.findOne({ _id, userId })
-//     .then(restaurant => {
-
-//       return restaurant.save()
-//     })
-//     .then(() => res.redirect(`/restaurants/${_id}`))
-//     .catch(error => console.log(error))
-// })
-
-//   return Restaurant.findByIdAndUpdate({ _id, userId }, req.body) //找到對應的資料後整個一起更新
-//     .then(() => res.redirect(`/restaurants/${_id}`))
-//     .catch(err => console.log(err))
-// })
-
-// 刪除資料 delete 路由
+// 刪除資料路由
 router.delete('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id

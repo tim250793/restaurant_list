@@ -25,12 +25,12 @@
                     我的餐廳清單
                 </a>
                 <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users/login">登入</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/users/register">註冊</a>
-                    </li>
+                    {{#if isAuthenticated}}
+                    <a href="/users/logout" class="btn btn-outline-dark">Logout</a>
+                    {{else}}
+                    <a href="/users/login" class="btn btn-outline-dark">Login</a>
+                    {{/if}}
+                </ul>
             </div>
         </nav>
         <div class="banner"></div>
