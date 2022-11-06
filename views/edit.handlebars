@@ -2,7 +2,8 @@
   <h2 class="bg-info m-3 p-1 rounded">餐廳編輯頁面</h2>
 </div>
 
-<form action="/restaurants/{{restaurant._id}}/edit" method="POST">
+<form action="/restaurants/{{restaurant._id}}?_method=PUT" method="POST">
+  <input type="hidden" name="_method" value="put" />
   <input class="d-block m-2" type="text" placeholder="中文名稱" name="name" value="{{restaurant.name}}" required />
   <input class="d-block m-2" type="text" placeholder="英文名稱" name="name_en" value="{{restaurant.name_en}}" required />
 
