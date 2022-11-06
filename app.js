@@ -51,20 +51,6 @@ app.use((req, res, next) => {
   next()
 })
 
-
-//搜尋餐廳
-app.get("/search", (req, res) => {
-  if (!req.query.keywords) {
-    return res.redirect("/")
-  }
-  
-  const keyword = req.query.keywords.trim().toLowerCase()
-  const restaurant = Restaurant.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword)
-  })
-  res.render('index', { restaurant })
-})
-
 app.use(routes)
 
 // start and listen on the Express server
