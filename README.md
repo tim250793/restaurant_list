@@ -42,12 +42,13 @@
 git clone https://github.com/tim250793/restaurant_list/
 ```
 
-1. 透過終端機，cd 至存放的資料夾
-2. 啟動伺服器，執行 app.js 檔案
+3. 透過終端機，cd 至存放的資料夾
+4. 設定環境變數.env檔
+5. 啟動伺服器，執行 app.js 檔案
 ```bash
    nodemon app.js
 ```
-1. 連結後，開啟任一瀏覽器瀏覽器輸入 http://localhost:3000/ 開始使用
+6. 連結後，開啟任一瀏覽器瀏覽器輸入 http://localhost:3000/ 開始使用
 
 ## 環境建置與需求 (prerequisites)
 
